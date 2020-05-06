@@ -25,8 +25,6 @@
 
 package com.owncloud.android.ui.activity;
 
-import android.accounts.Account;
-import android.app.Dialog;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -60,6 +58,7 @@ import com.owncloud.android.lib.common.operations.RemoteOperation;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.users.GetUserInfoRemoteOperation;
+import com.owncloud.android.ui.dialog.AccountRemovalConfirmationDialog;
 import com.owncloud.android.ui.events.TokenPushEvent;
 import com.owncloud.android.utils.DisplayUtils;
 import com.owncloud.android.utils.PushUtils;
@@ -77,11 +76,9 @@ import javax.inject.Inject;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindString;
@@ -310,12 +307,10 @@ public class UserInfoActivity extends FileActivity implements Injectable {
     }
 
     public static void openAccountRemovalConfirmationDialog(User user, FragmentManager fragmentManager) {
-        UserInfoActivity.AccountRemovalConfirmationDialog dialog =
-            UserInfoActivity.AccountRemovalConfirmationDialog.newInstance(user);
+        AccountRemovalConfirmationDialog dialog = AccountRemovalConfirmationDialog.newInstance(user);
         dialog.show(fragmentManager, "dialog");
     }
 
-    public static class AccountRemovalConfirmationDialog extends DialogFragment {
 
         private Account account;
 
